@@ -79,7 +79,7 @@ allowed host and options values.
 ## Running It
 Get up and running immediately with `script/server`.
 
-#### Note: 
+#### Note:
 On some distros, you might get an error when running it:
 `/usr/bin/node: No such file or directory`
 
@@ -189,14 +189,14 @@ off.
 `harmony-api/hubs/family-room/activities/watch-tv/command` `on`  
 
 #### Device commands
-Just provide the slug of the hub and the device to control with the command you want to execute. 
+Just provide the slug of the hub and the device to control with the command you want to execute.
 `harmony-api/hubs/family-room/devices/tv/command` `volume-down`
 
 To optionally repeat the command any number of times, provide an optional repeat integer.
 `harmony-api/hubs/family-room/devices/tv/command` `volume-down:5`
 
 #### Current activity commands
-Just provide the slug of the hub and the command you want to execute. 
+Just provide the slug of the hub and the command you want to execute.
 `harmony-api/hubs/family-room/command` `volume-down`
 
 To optionally repeat the command any number of times, provide an optional repeat integer.
@@ -297,3 +297,37 @@ These are the endpoints you can hit to do things.
 * fork
 * create a feature branch
 * open a Pull Request
+
+# LavaTiles stuff
+
+## PI
+cd LavaTiles
+git clone https://github.com/lavatiles/harmony-api.git
+sudo npm install forever -g
+script/bootstrap
+Test with: script/server
+It works:
+Starting discovery.
+Hub discovered: GreatRoom at 192.168.1.23.
+Updating activities for greatroom.
+sudo script/install-linux
+It works:
++ set -e
+++ dirname script/install-linux
++ cd script/..
++ INSTALL_PATH=/var/lib/harmony-api
++ CONF_PATH=/etc/harmony-api
++ echo 'Installing harmony-api for Linux...'
+Installing harmony-api for Linux...
++ mkdir -p /var/lib/harmony-api
++ cp -R app.js config Dockerfile LICENSE log node_modules package.json package-lock.json public README.md script /var/lib/harmony-api
++ ln -sf /var/lib/harmony-api/config /etc/harmony-api
++ ln -sf /var/lib/harmony-api/config/harmony-api-server.service /etc/systemd/system/
++ systemctl enable harmony-api-server.service
+Created symlink /etc/systemd/system/multi-user.target.wants/harmony-api-server.service → /var/lib/harmony-api/config/harmony-api-server.service.
+
+Enable at reboot
+sudo systemctl enable harmony-api-server
+Check Status
+sudo systemctl status harmony-api-server
+Browser: http://lavatiles:8282/
